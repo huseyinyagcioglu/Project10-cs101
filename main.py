@@ -70,7 +70,7 @@ attendees = load_json(ATTENDEES_FILE)
 registrations = load_json(REGISTRATIONS_FILE)
 
 
-# ---------------- EVENT MANAGEMENT ----------------
+#EVENT MANAGEMENT
 
 def create_event():
     name = input("Event name: ").strip()
@@ -125,12 +125,12 @@ def get_event_by_id(event_id):
 def register_attendee():
     email = input("Email: ").strip().lower()
     if not email:
-        print("❌ Email cannot be empty.")
+        print(" Email cannot be empty.")
         return
 
     # prevent duplicate attendee by email
     if any(a["email"].lower() == email for a in attendees):
-        print("⚠️ This email is already registered as an attendee.")
+        print(" This email is already registered as an attendee.")
         return
 
     pin = str(uuid.uuid4())[:4].upper()
@@ -145,7 +145,7 @@ def register_attendee():
 
     attendees.append(attendee)
     save_json(ATTENDEES_FILE, attendees)
-    print(f"✅ Attendee registered. PIN: {pin}")
+    print(f" Attendee registered. PIN: {pin}")
 
 
 def get_attendee_by_email(email):
@@ -205,8 +205,7 @@ def create_registration():
     print(f" Registration {status}. Code: {registration['confirmation_code']}")
 
 
-# ---------------- CHECK-IN ----------------
-
+#CHECK-IN 
 def check_in():
     code = input("Confirmation code: ").strip().upper()
     reg = next((r for r in registrations if r["confirmation_code"].upper() == code), None)
@@ -230,7 +229,7 @@ def check_in():
     print(" Check-in successful.")
 
 
-# ---------------- REPORTS ----------------
+#  REPORTS 
 
 def attendance_report():
     if not events:
@@ -249,7 +248,7 @@ def attendance_report():
         )
 
 
-# ---------------- MENU ----------------
+#  MENU 
 
 def menu():
     while True:
